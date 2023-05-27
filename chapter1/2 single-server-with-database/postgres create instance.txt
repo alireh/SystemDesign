@@ -1,0 +1,82 @@
+--install postgres pgadmin
+set environment variable for PATH:C:\Program Files\PostgreSQL\15\bin
+
+--create empty folder in path:D:\postgres-instances\postgres-instance1
+
+--open cmd and run command:
+initdb -D D:\postgres-instances\postgres-instance1 -W -A md5 -U <username> (--username like postgres)
+
+--create this path "D:\postgres-instances\postgres-instance1\log\log.txt"
+--open D:\postgres-instances\postgres-instance1\postgresql.conf and change port to arbitrary port number like 5421 (not that if in below command add -p [port number] you dont need change this line but if
+run below command without -p [port number] instance run in port in that specified in postgresql.conf)
+
+
+--run command:
+pg_ctl -D D:\postgres-instances\postgres-instance1 -o "-p 5421" -l D:\postgres-instances\postgres-instance1\log\log.txt start
+
+
+open "sql shell" and connect to postgres new instance
+
+
+
+
+for stop instance service
+--run command:
+pg_ctl -D D:\postgres-instances\postgres-instance1 -o "-p 5421" -l D:\postgres-instances\postgres-instance1\log\log.txt stop
+
+
+
+
+
+
+example:
+initdb -D \postgres-instances\postgres-instance1 -W -A md5 -U postgres
+initdb -D \postgres-instances\postgres-instance2 -W -A md5 -U postgres
+initdb -D \postgres-instances\postgres-instance3 -W -A md5 -U postgres
+initdb -D \postgres-instances\postgres-instance4 -W -A md5 -U postgres
+
+
+pg_ctl start -D \postgres-instances\postgres-instance1
+pg_ctl start -D \postgres-instances\postgres-instance2
+pg_ctl start -D \postgres-instances\postgres-instance3
+pg_ctl start -D \postgres-instances\postgres-instance4
+
+pg_ctl -D \postgres-instances\postgres-instance1 -o "-p 5421" -l \postgres-instances\postgres-instance1\log\log.txt start
+pg_ctl -D \postgres-instances\postgres-instance2 -o "-p 5422" -l \postgres-instances\postgres-instance2\log\log.txt start
+pg_ctl -D \postgres-instances\postgres-instance3 -o "-p 5423" -l \postgres-instances\postgres-instance3\log\log.txt start
+pg_ctl -D \postgres-instances\postgres-instance4 -o "-p 5424" -l \postgres-instances\postgres-instance4\log\log.txt start
+pg_ctl -D \postgres-instances\postgres-instance-main -o "-p 5420" -l \postgres-instances\postgres-instance-main\log\log.txt start
+
+
+
+
+--https://www.sigterritoires.fr/index.php/en/replicating-a-postgresql-database-in-a-windows-workstation/
+--Replication
+--create user in master node
+--open sql shell or pgAdmin query
+CREATE ROLE master_user REPLICATION LOGIN PASSWORD 'postgres';
+--if created output would be "CREATE ROLE"
+
+--restart server:
+pg_ctl -D D:\postgres-instances\postgres-instance-main -o "-p 5420" -l D:\postgres-instances\postgres-instance-main\log\log.txt restart
+
+
+--in master and slaves postgresql.conf:
+--change wal_level to logical
+wal_level = logical
+
+restart db
+pg_ctl -D [path] -o "-p [port]" -l [logPath] restart
+
+
+--on master node query tool in pgAdmin:
+CREATE ROLE rep REPLICATION LOGIN PASSWORD 'postgres';
+GRANT ALL ON [table name] TO rep;
+CREATE PUBLICATION publi_partners FOR TABLE posts;
+
+in slave node 1:
+CREATE SUBSCRIPTION subscri_partners1 CONNECTION 'dbname = postgres host = [master ip like localhost] user = rep password = postgres port = [master port]' PUBLICATION publi_partners;
+
+in slave node 2:
+CREATE SUBSCRIPTION subscri_partners2 CONNECTION 'dbname = postgres host = [master ip like localhost] user = rep password = postgres port = [master port]' PUBLICATION publi_partners;
+

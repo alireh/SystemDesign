@@ -1,0 +1,19 @@
+{
+	"proxy": {
+		"port": "8001"
+	},
+	"backends": [
+		{
+			"url": "http://localhost:8011/"
+		},
+		{
+			"url": "http://localhost:8012/"
+		},
+		{
+			"url": "http://localhost:8013"
+		},
+		{
+			"url": "http://localhost:8014/"
+		}
+	]
+}
