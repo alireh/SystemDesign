@@ -2,6 +2,9 @@
 set environment variable for PATH:C:\Program Files\PostgreSQL\15\bin
 
 --create empty folder in path:D:\postgres-instances\postgres-instance1
+--create empty folder in path:D:\postgres-instances\postgres-instance2
+--create empty folder in path:D:\postgres-instances\postgres-instance3
+--create empty folder in path:D:\postgres-instances\postgres-instance4
 
 --open cmd and run command:
 initdb -D D:\postgres-instances\postgres-instance1 -W -A md5 -U <username> (--username like postgres)
