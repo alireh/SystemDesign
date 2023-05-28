@@ -1,0 +1,19 @@
+1 - Click on the Debug Icon on the left pane of Visual Studio Code. Next, click on the Gear Icon to create a configuration
+2 - in .vscode/launch.json add this lines:
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "remotePath": "",
+            "program": "${workspaceRoot}",
+            "env": {},
+            "args": [],
+            "showLog": true
+        }
+    ]
+}
+3 - press f5 to run in debug mode
