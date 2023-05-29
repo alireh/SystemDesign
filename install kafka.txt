@@ -1,0 +1,11 @@
+install kafka on windows
+1 - download jdk 8 or higher and install it
+2 - download kafka binary from https://kafka.apache.org/downloads
+3 - extract it to arbitrary path
+4 - change in config\server.properties
+	log.dirs=../../logs/kafka_logs (kafka_logs file create two folder before windows folder)
+5 - change in config\zookeeper.properties
+	log.dirs=../../logs/zookeeper_logs (zookeeper_logs file create two folder before windows folder)
+6 - run zookeeper-server-start.bat(for stop run zookeeper-server-stop.bat)
+7 - run kafka-server-start.bat(for stop run kafka-server-stop.bat)
+
