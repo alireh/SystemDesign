@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	topic          = "message-log"
+	topic          = "my-kafka-topic"
 	broker1Address = "localhost:9093"
 	broker2Address = "localhost:9094"
 	broker3Address = "localhost:9095"
@@ -76,3 +76,5 @@ func main() {
 	go produce(ctx)
 	consume(ctx)
 }
+
+//https://www.sohamkamani.com/golang/working-with-kafka/#getting-started
