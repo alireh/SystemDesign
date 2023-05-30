@@ -1,3 +1,4 @@
+//https://www.sohamkamani.com/install-and-run-kafka-locally/
 install kafka on windows
 1 - download jdk 8 or higher and install it
 2 - download kafka binary from https://kafka.apache.org/downloads
@@ -6,6 +7,16 @@ install kafka on windows
 	log.dirs=../../logs/kafka_logs (kafka_logs file create two folder before windows folder)
 5 - change in config\zookeeper.properties
 	log.dirs=../../logs/zookeeper_logs (zookeeper_logs file create two folder before windows folder)
-6 - run zookeeper-server-start.bat(for stop run zookeeper-server-stop.bat)
-7 - run kafka-server-start.bat(for stop run kafka-server-stop.bat)
+6 - run bin\windows\zookeeper-server-start.bat config\zookeeper.properties (for stop run zookeeper-server-stop.bat)(in path change \ to / If os was windows)
+7 - run bin\windows\kafka-server-start.bat config\server.properties (for stop run kafka-server-stop.bat) (in path change \ to / If os was windows)
+
+
+8 - for each broker with number n
+	create server.n.properties(copy server.properties)
+	in server.n.properties change this lines:
+	broker.id=[id number like 0 or 1 to above]
+	listeners=PLAINTEXT://:[port number]
+	log.dirs=../logs/kafka_logsn
+	run bin\windows\kafka-server-start.bat config\server.n.properties
+
 

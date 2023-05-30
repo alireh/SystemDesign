@@ -1,0 +1,2 @@
+windows : $env:GOPROXY = "https://goproxy.io,direct"
+linux : export GOPROXY=https://goproxy.io,direct
