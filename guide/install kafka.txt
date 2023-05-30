@@ -20,3 +20,41 @@ install kafka on windows
 	run bin\windows\kafka-server-start.bat config\server.n.properties
 
 
+9 - create topic:
+	bin\windows\kafka-topics.bat --create --topic my-kafka-topic --bootstrap-server localhost:9093 --partitions 3 --replication-factor 2
+	//replication-factor is copy count of partition in brokers
+	//partitions is brokers count to split data between them
+	//bootstrap-server is one of our active Kafka brokers
+
+10 - for list all available topics
+	bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+11 - for more detail about topics
+	bin\windows\kafka-topics.bat --describe --bootstrap-server localhost:9092
+
+
+12 - Sending Messages to a Topic
+	bin\windows\kafka-console-producer.bat --broker-list localhost:9093,localhost:9094,localhost:9095 --topic my-kafka-topic
+//With type message and hit enter message sent
+
+13 - Use Kafka consumers to read data from the cluster
+	bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9093 --topic my-kafka-topic --from-beginning
+	//from-beginning means that read data even if sent before running this command
+
+14 - start another consumer
+	bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9093 --topic my-kafka-topic --from-beginning --group group2
+	//group for differentiates one consumer from another
+	//a group of consumers to read one topic
+
+
+if one of broker was shut down our data was not lost because replication factor is 2 and we have 2 brokers now
+but if two of them failed losting data is occured
+
+
+must be replication <= available brokers
+	
+
+
+
+
+
