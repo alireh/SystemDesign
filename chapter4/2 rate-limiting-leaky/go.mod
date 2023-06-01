@@ -1,4 +1,4 @@
-module rate-limiting-all
+module rate-limiting-leaky
 
 go 1.20
 
