@@ -44,7 +44,7 @@ install kafka on windows
 14 - start another consumer
 	bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9093 --topic my-kafka-topic --from-beginning --group group2
 	//group for differentiates one consumer from another
-	//a group of consumers to read one topic
+	//a group of consumers to read one topic it means if we have 3 consumers with one common group they never receive duplicate message and msgs only send to one of these
 
 
 if one of broker was shut down our data was not lost because replication factor is 2 and we have 2 brokers now
@@ -54,6 +54,7 @@ but if two of them failed losting data is occured
 must be replication <= available brokers
 	
 
+when send data to brokers one of brokers would be leader and data replicate copy to foloowers
 
 
 

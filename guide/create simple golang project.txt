@@ -1,0 +1,11 @@
+1 - go mod init token-bucket-rate-limiting
+2 - add main.go file with this content:
+	package main
+
+	import "fmt"
+
+	func main() {
+		fmt.Println("Hello, world.")
+	}
+
+3 - run go run main.go

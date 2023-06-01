@@ -1,0 +1,3 @@
+go get [url]
+like this:
+go get "go.uber.org/ratelimit"
