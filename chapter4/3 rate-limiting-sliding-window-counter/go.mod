@@ -1,4 +1,4 @@
-module rate-limiting-sliding-window
+module rate-limiting-sliding-window-counter
 
 go 1.20
 
